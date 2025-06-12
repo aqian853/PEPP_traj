@@ -1,0 +1,13 @@
+---
+title: "PEPP_traj analyses"
+author: "Alyssa Qian"
+date: "`r Sys.Date()`"
+output: bookdown::gitbook
+github-repo: https://github.com/aqian853/PEPP_traj
+description: "trajectories of depressive and negative symptoms in PEPP"
+fontsize: 10pt
+monofontoptions: "Scale=0.5"
+classoption: landscape
+---
+
+# The index page
