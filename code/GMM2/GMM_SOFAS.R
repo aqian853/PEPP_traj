@@ -15,7 +15,7 @@ library(ggalluvial)
 library(reshape2)
 
 PEPP_2024_12_12_IDmatched <- read_sav(
-  "/Users/aq/Documents/PePP_Project/PEPP_2024-12-12-IDmatched.sav")
+  "PEPP_2024-12-12-IDmatched.sav")
 
 # Recoding NA
 PEPP_2024_12_12_IDmatched <- PEPP_2024_12_12_IDmatched %>%
