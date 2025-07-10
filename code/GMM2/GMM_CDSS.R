@@ -585,9 +585,9 @@ PEPP_cdss_2_c_subset_plotting %>%
   geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
   geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
   scale_x_continuous(breaks = unique(PEPP_cdss_2_c_subset_plotting$time_point)) +
-  labs(x = "Time Point (Months)", y = "CDSS General Depressive Composite Score", colour = "Latent Class") +
+  labs(x = "Time Point (Months)", y = "Total CDSS Score", colour = "Latent Class") +
   geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
-  labs(title = "CDSS General Depressive Composite Score Over Time") +
+  labs(title = "Total CDSS Score Over Time") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
   #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
   scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_cdss_2_c_subset_plotting$class)), name = "Set1")) +  # Distinct colors
@@ -598,9 +598,9 @@ PEPP_cdss_2_c_subset_plotting_2 %>%
   geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
   geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
   scale_x_continuous(breaks = unique(PEPP_cdss_2_c_subset_plotting_2$time_point)) +
-  labs(x = "Time Point (Months)", y = "CDSS General Depressive Composite Score", colour = "Latent Class") +
+  labs(x = "Time Point (Months)", y = "Total CDSS Score", colour = "Latent Class") +
   geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
-  labs(title = "CDSS General Depressive Composite Score Over Time") +
+  labs(title = "Total CDSS Score Over Time") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
   #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
   scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_cdss_2_c_subset_plotting_2$class)), name = "Set1")) +  # Distinct colors
@@ -613,9 +613,9 @@ PEPP_cdss_2_c_subset_plotting %>%
   geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
   geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
   scale_x_continuous(breaks = unique(PEPP_cdss_2_c_subset_plotting$time_point)) +
-  labs(x = "Time Point (Months)", y = "CDSS General Depressive Composite Score", colour = "Latent Class") +
+  labs(x = "Time Point (Months)", y = "Total CDSS Score", colour = "Latent Class") +
   geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
-  labs(title = "CDSS General Depressive Composite Score Over Time") +
+  labs(title = "Total CDSS Score Over Time") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
   #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
   scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_cdss_2_c_subset_plotting$class)), name = "Set1")) +  # Distinct colors
@@ -627,9 +627,9 @@ PEPP_cdss_2_c_subset_plotting_2 %>%
   geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
   geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
   scale_x_continuous(breaks = unique(PEPP_cdss_2_c_subset_plotting_2$time_point)) +
-  labs(x = "Time Point (Months)", y = "CDSS General Depressive Composite Score", colour = "Latent Class") +
+  labs(x = "Time Point (Months)", y = "Total CDSS Score", colour = "Latent Class") +
   geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
-  labs(title = "CDSS General Depressive Composite Score Over Time") +
+  labs(title = "Total CDSS Score Over Time") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
   #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
   scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_cdss_2_c_subset_plotting_2$class)), name = "Set1")) +  # Distinct colors
