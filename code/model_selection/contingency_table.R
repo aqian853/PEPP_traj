@@ -90,5 +90,14 @@ valid_rows <- !is.na(clust1) & !is.na(clust2)
 clust1 <- clust1[valid_rows]
 clust2 <- clust2[valid_rows]
 
-mat <- table(paste0("SANS_", clust1), paste0("CDSS_", clust2)) ## Adjust the variables here
-print(mat)
+# Print table with absolute count
+mat <- table(paste0("SANS_", clust1), paste0("CDSS_", clust2))
+mat_tot <- addmargins(mat, margin = c(1, 2), FUN = sum)
+print(mat_tot)
+total_count <- sum(mat)
+
+# Print table with percentage
+percent_mat <- prop.table(mat) * 100
+percent_mat_with_totals <- addmargins(percent_mat, margin = c(1, 2), FUN = sum)
+percent_mat_with_totals_rounded <- round(percent_mat_with_totals, 2)
+print(percent_mat_with_totals_rounded)
