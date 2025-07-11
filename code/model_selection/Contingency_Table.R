@@ -1,14 +1,14 @@
 library(dplyr)
 
 ### Loading GMM Models (18mo)
-gmm2_2_cdss <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm2_2_CDSS_c.rds")
-gmm3_2_cdss <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm3_2_CDSS_c.rds")
-gmm2_2_sans <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm2_2_sans_c.rds")
-gmm3_2_sans <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm3_2_sans_c.rds")
-gmm2_2_sofas <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm2_2_sofas.rds")
-gmm3_2_sofas <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm3_2_sofas.rds")
-gmm2_2_LV1 <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm2_2_LV1_c.rds")
-gmm3_2_LV1 <- readRDS("/projects/aqian/PEPP_traj/reports/GMM2_outputs/gmm3_2_LV1_c.rds")
+gmm2_2_cdss <- readRDS("gmm2_2_CDSS_c.rds")
+gmm3_2_cdss <- readRDS("gmm3_2_CDSS_c.rds")
+gmm2_2_sans <- readRDS("gmm2_2_sans_c.rds")
+gmm3_2_sans <- readRDS("gmm3_2_sans_c.rds")
+gmm2_2_sofas <- readRDS("gmm2_2_sofas.rds")
+gmm3_2_sofas <- readRDS("gmm3_2_sofas.rds")
+gmm2_2_LV1 <- readRDS("gmm2_2_LV1_c.rds")
+gmm3_2_LV1 <- readRDS("gmm3_2_LV1_c.rds")
 
 ## Extracting pprob
 div_cdss_2 <- gmm2_2_cdss[["pprob"]]
