@@ -77,3 +77,71 @@ plot(model_sans_3)
 emmeans(model_cdss_3, pairwise ~ class_cdss_3)
 emmeans(model_Lv1_3, pairwise ~ class_LV1_3)
 emmeans(model_sans_3, pairwise ~ class_sans_3)
+
+
+## Plotting ===================================================================
+## CDSS 2
+gmm_class_mem_SOFAS_24_CDSS2_clean <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(class_cdss_2))
+
+ggplot(gmm_class_mem_SOFAS_24_CDSS2_clean, aes(x = class_cdss_2, y = SOFAS_24)) +
+  geom_boxplot() +
+  labs(title = "SOFAS at 24 Months by CDSS Trajectory Class",
+       x = "CDSS Trajectory Class",
+       y = "SOFAS Score at 24 Months") +
+  theme_minimal()
+
+## LV1 2
+gmm_class_mem_SOFAS_24_LV12_clean <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(class_LV1_2))
+
+ggplot(gmm_class_mem_SOFAS_24_LV12_clean, aes(x = class_LV1_2, y = SOFAS_24)) +
+  geom_boxplot() +
+  labs(title = "SOFAS at 24 Months by LV1 Trajectory Class",
+       x = "LV1 Trajectory Class",
+       y = "SOFAS Score at 24 Months") +
+  theme_minimal()
+
+## SANS 2
+gmm_class_mem_SOFAS_24_SANS2_clean <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(class_sans_2))
+
+ggplot(gmm_class_mem_SOFAS_24_SANS2_clean, aes(x = class_sans_2, y = SOFAS_24)) +
+  geom_boxplot() +
+  labs(title = "SOFAS at 24 Months by SANS Trajectory Class",
+       x = "SANS Trajectory Class",
+       y = "SOFAS Score at 24 Months") +
+  theme_minimal()
+
+## CDSS 3
+gmm_class_mem_SOFAS_24_CDSS3_clean <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(class_cdss_3))
+
+ggplot(gmm_class_mem_SOFAS_24_CDSS3_clean, aes(x = class_cdss_3, y = SOFAS_24)) +
+  geom_boxplot() +
+  labs(title = "SOFAS at 24 Months by CDSS Trajectory Class",
+       x = "CDSS Trajectory Class",
+       y = "SOFAS Score at 24 Months") +
+  theme_minimal()
+
+## LV1 3
+gmm_class_mem_SOFAS_24_LV13_clean <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(class_LV1_3))
+
+ggplot(gmm_class_mem_SOFAS_24_LV13_clean, aes(x = class_LV1_3, y = SOFAS_24)) +
+  geom_boxplot() +
+  labs(title = "SOFAS at 24 Months by LV1 Trajectory Class",
+       x = "LV1 Trajectory Class",
+       y = "SOFAS Score at 24 Months") +
+  theme_minimal()
+
+## SANS
+gmm_class_mem_SOFAS_24_SANS3_clean <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(class_sans_3))
+
+ggplot(gmm_class_mem_SOFAS_24_SANS3_clean, aes(x = class_sans_3, y = SOFAS_24)) +
+  geom_boxplot() +
+  labs(title = "SOFAS at 24 Months by SANS Trajectory Class",
+       x = "SANS Trajectory Class",
+       y = "SOFAS Score at 24 Months") +
+  theme_minimal()
