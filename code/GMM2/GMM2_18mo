@@ -1,4 +1,4 @@
-### July 10th - GMM2 for Total LV1, LV1, and Total SANS (clean, up to 18 months)
+### July 10th - GMM2 for Total CDSS, LV1, and Total SANS (clean, up to 18 months)
 
 library(tidyverse)
 library(haven)
