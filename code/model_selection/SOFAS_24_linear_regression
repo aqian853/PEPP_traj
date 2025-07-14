@@ -1,0 +1,79 @@
+library(tidyverse)
+library(dplyr)
+library(haven)
+library(ggplot2)
+library(emmeans)
+
+### Loading GMM Model Class Membership (18mo)
+gmm_class_div_18mo <- read.csv("gmm_class_div_18mo.csv")
+
+### loading PEPP data
+PEPP_data <- read_sav("PEPP_2024-12-12-IDmatched.sav")
+
+## Subsetting for class membership only without pprob
+gmm_class_mem <- gmm_class_div_18mo %>%
+  select(contains("pin"), contains("class_"))
+
+## joining SOFAS_24 with gmm_class_mem
+SOFAS_24 <- PEPP_data %>%
+  select(contains("pin"), contains("SOFAS_24"))
+
+gmm_class_mem$pin <- as.character(gmm_class_mem$pin)
+SOFAS_24$pin <- as.character(SOFAS_24$pin)
+
+gmm_class_mem_SOFAS_24 <- full_join(gmm_class_mem, SOFAS_24, by = "pin") 
+
+gmm_class_mem_SOFAS_24 <- gmm_class_mem_SOFAS_24 %>%
+  filter(!is.na(SOFAS_24))
+
+print(gmm_class_mem_SOFAS_24)
+
+## turn into factors (2-class, set class 1 as the reference group)
+gmm_class_mem_SOFAS_24 <- gmm_class_mem_SOFAS_24 %>%
+  mutate(class_cdss_2 = factor(class_cdss_2),
+         class_sans_2 = factor(class_sans_2),
+         class_LV1_2 = factor(class_LV1_2))
+         
+## Fitting the model
+model_cdss_2 <- lm(SOFAS_24 ~ class_cdss_2, data = gmm_class_mem_SOFAS_24)
+model_sans_2 <- lm(SOFAS_24 ~ class_sans_2, data = gmm_class_mem_SOFAS_24)
+model_lv1_2  <- lm(SOFAS_24 ~ class_LV1_2, data = gmm_class_mem_SOFAS_24)
+summary(model_cdss_2)
+summary(model_sans_2)
+summary(model_lv1_2)
+
+## check assumptions
+par(mfrow=c(2,2))
+plot(model_cdss_2)
+plot(model_lv1_2)
+plot(model_sans_2)
+
+
+
+## turn into factors (3-class, set class 1 as the reference group)
+gmm_class_mem_SOFAS_24 <- gmm_class_mem_SOFAS_24 %>%
+  mutate(class_cdss_3 = factor(class_cdss_3),
+         class_sans_3 = factor(class_sans_3),
+         class_LV1_3 = factor(class_LV1_3))
+
+model_cdss_3 <- lm(SOFAS_24 ~ class_cdss_3, data = gmm_class_mem_SOFAS_24)
+model_LV1_3 <- lm(SOFAS_24 ~ class_LV1_3, data = gmm_class_mem_SOFAS_24)
+model_sans_3 <- lm(SOFAS_24 ~ class_sans_3, data = gmm_class_mem_SOFAS_24)
+
+summary(model_cdss_3)
+summary(model_LV1_3)
+summary(model_sans_3)
+
+print(gmm_class_mem_SOFAS_24)
+
+## check assumptions
+par(mfrow=c(2,2))
+plot(model_cdss_3)
+par(mfrow=c(2,2))
+plot(model_LV1_3)
+plot(model_sans_3)
+
+## Post Hoc
+emmeans(model_cdss_3, pairwise ~ class_cdss_3)
+emmeans(model_Lv1_3, pairwise ~ class_LV1_3)
+emmeans(model_sans_3, pairwise ~ class_sans_3)
