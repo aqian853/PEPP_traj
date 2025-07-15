@@ -3,8 +3,8 @@ library(haven)
 library(dplyr)
 
 ## Load data
-gmm_18mo_class_membership <- read.csv("gmm_class_div_18mo.csv")
-PEPP_data <- read_sav("PEPP_2024-12-12-IDmatched.sav")
+gmm_18mo_class_membership <- read.csv("/projects/aqian/PEPP_traj/reports/GMM_class_membership/gmm_class_div_18mo.csv")
+PEPP_data <- read_sav("/projects/aqian/PEPP_traj/docs/raw_data/PEPP_2024-12-12-IDmatched.sav")
 
 ## Change class variable as factor
 gmm_class_mem <- gmm_18mo_class_membership %>%
@@ -24,59 +24,123 @@ gmm_class_mem_SOFAS_0 <- gmm_class_mem_SOFAS_0 %>%
 
 print(gmm_class_mem_SOFAS_0)
 
+## joining CPZ_0 with gmm_class_mem_SOFAS_0
+CPZ_0 <- PEPP_data %>%
+  select(contains("pin"), contains("CPZ_0"))
+
+gmm_class_mem_SOFAS_0$pin <- as.character(gmm_class_mem_SOFAS_0$pin)
+CPZ_0$pin <- as.character(CPZ_0$pin)
+
+gmm_class_mem_SOFAS_CPZ <- full_join(gmm_class_mem_SOFAS_0, CPZ_0, by = "pin") 
+
+gmm_class_mem_SOFAS_CPZ <- gmm_class_mem_SOFAS_CPZ %>%
+  filter(!is.na(CPZ_0))
+
+print(gmm_class_mem_SOFAS_CPZ)
+
 ## Turn into factors
-gmm_class_mem_SOFAS_0$class_cdss_2 <- factor(gmm_class_mem_SOFAS_0$class_cdss_2, 
+gmm_class_mem_SOFAS_CPZ$class_cdss_2 <- factor(gmm_class_mem_SOFAS_CPZ$class_cdss_2, 
                                              levels = c(1, 2), 
                                              labels = c("Persistent_Low", 
                                                         "Decreasing"))
 
-gmm_class_mem_SOFAS_0$class_cdss_3 <- factor(gmm_class_mem_SOFAS_0$class_cdss_3, 
-                            levels = c(1, 2, 3), 
-                            labels = c("Fluctuating_High", 
-                                       "Persistent_Low", 
-                                       "Decreasing"))
-
-gmm_class_mem_SOFAS_0$class_sans_2 <- factor(gmm_class_mem_SOFAS_0$class_sans_2, 
-                                             levels = c(1, 2), 
-                                             labels = c("Persistent_High", 
-                                                        "Decreasing"))
-
-gmm_class_mem_SOFAS_0$class_sans_3 <- factor(gmm_class_mem_SOFAS_0$class_sans_3, 
-                                             levels = c(1, 2, 3), 
-                                             labels = c("Decrease_Sustained", 
-                                                        "Persistent_High", 
-                                                        "Gradual_Decrease"))
-
-gmm_class_mem_SOFAS_0$class_LV1_2 <- factor(gmm_class_mem_SOFAS_0$class_LV1_2, 
-                                             levels = c(1, 2), 
-                                             labels = c("Persistent_Low", 
-                                                        "Decreasing"))
-
-gmm_class_mem_SOFAS_0$class_LV1_3 <- factor(gmm_class_mem_SOFAS_0$class_LV1_3, 
+gmm_class_mem_SOFAS_CPZ$class_cdss_3 <- factor(gmm_class_mem_SOFAS_CPZ$class_cdss_3, 
                                              levels = c(1, 2, 3), 
                                              labels = c("Fluctuating_High", 
                                                         "Persistent_Low", 
                                                         "Decreasing"))
 
-## Fit multinomail logistic regression
+gmm_class_mem_SOFAS_CPZ$class_sans_2 <- factor(gmm_class_mem_SOFAS_CPZ$class_sans_2, 
+                                             levels = c(1, 2), 
+                                             labels = c("Persistent_High", 
+                                                        "Decreasing"))
+
+gmm_class_mem_SOFAS_CPZ$class_sans_3 <- factor(gmm_class_mem_SOFAS_CPZ$class_sans_3, 
+                                             levels = c(1, 2, 3), 
+                                             labels = c("Decrease_Sustained", 
+                                                        "Persistent_High", 
+                                                        "Gradual_Decrease"))
+
+gmm_class_mem_SOFAS_CPZ$class_LV1_2 <- factor(gmm_class_mem_SOFAS_CPZ$class_LV1_2, 
+                                            levels = c(1, 2), 
+                                            labels = c("Persistent_Low", 
+                                                       "Decreasing"))
+
+gmm_class_mem_SOFAS_CPZ$class_LV1_3 <- factor(gmm_class_mem_SOFAS_CPZ$class_LV1_3, 
+                                            levels = c(1, 2, 3), 
+                                            labels = c("Fluctuating_High", 
+                                                       "Persistent_Low", 
+                                                       "Decreasing"))
+
+## Fit multinomail logistic regression - SOFAS_0
 ## CDSS 2-class =================================================================
-model_cdss_2 <- multinom(class_cdss_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_0)
-summary(model_cdss_2)
+model_cdss_2_sofas <- multinom(class_cdss_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_cdss_2_sofas)
 
 # calculate p-value
-z <- summary(model_cdss_2)$coefficients / summary(model_cdss_2)$standard.errors
-p <- 2 * (1 - pnorm(abs(z)))
-p
+z_cdss_2_sofas <- summary(model_cdss_2_sofas)$coefficients / summary(model_cdss_2_sofas)$standard.errors
+p_cdss_2_sofas <- 2 * (1 - pnorm(abs(z_cdss_2_sofas)))
+p_cdss_2_sofas
 
-exp(coef(model_cdss_2)) # exponentiate coefficients for odds ratios
+exp(coef(model_cdss_2_sofas)) # exponentiate coefficients for odds ratios
 
-# Predict probabilities for new values of SOFAS_0 based on the model above
-new_data_cdss2 <- data.frame(SOFAS_0 = seq(min(gmm_class_mem_SOFAS_0$SOFAS_0), 
-                                           max(gmm_class_mem_SOFAS_0$SOFAS_0), 
-                                           length.out=100))
-pred_probs_cdss2 <- predict(model_cdss_2, newdata = new_data_cdss2, type = "probs")
-head(pred_probs_cdss2)
+## CDSS 3-class =================================================================
+model_cdss_3_sofas <- multinom(class_cdss_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_cdss_3_sofas)
+
+# calculate p-value
+z_cdss_3_sofas <- summary(model_cdss_3_sofas)$coefficients / summary(model_cdss_3_sofas)$standard.errors
+p_cdss_3_sofas <- 2 * (1 - pnorm(abs(z_cdss_3_sofas)))
+p_cdss_3_sofas
+
+exp(coef(model_cdss_3_sofas)) # exponentiate coefficients for odds ratios
+
+
+## LV1 2-class =================================================================
+model_lv1_2_sofas <- multinom(class_LV1_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_lv1_2_sofas)
+
+# calculate p-value
+z_lv1_2_sofas <- summary(model_lv1_2_sofas)$coefficients / summary(model_lv1_2_sofas)$standard.errors
+p_lv1_2_sofas <- 2 * (1 - pnorm(abs(z_lv1_2_sofas)))
+p_lv1_2_sofas
+
+exp(coef(model_lv1_2_sofas)) # exponentiate coefficients for odds ratios
+
+## LV1 3-class =================================================================
+model_lv1_3_sofas <- multinom(class_LV1_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_lv1_3_sofas)
+
+# calculate p-value
+z_lv1_3_sofas <- summary(model_lv1_3_sofas)$coefficients / summary(model_lv1_3_sofas)$standard.errors
+p_lv1_3_sofas <- 2 * (1 - pnorm(abs(z_lv1_3_sofas)))
+p_lv1_3_sofas
+
+exp(coef(model_lv1_3_sofas)) # exponentiate coefficients for odds ratios
+
+
+## SANS 2-class =================================================================
+model_sans_2_sofas <- multinom(class_sans_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_sans_2_sofas)
+
+# calculate p-value
+z_sans_2_sofas <- summary(model_sans_2_sofas)$coefficients / summary(model_sans_2_sofas)$standard.errors
+p_sans_2_sofas <- 2 * (1 - pnorm(abs(z_sans_2_sofas)))
+p_sans_2_sofas
+
+exp(coef(model_sans_2_sofas)) # exponentiate coefficients for odds ratios
+
+## SANS 3-class =================================================================
+model_sans_3_sofas <- multinom(class_sans_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_sans_3_sofas)
+
+# calculate p-value
+z_sans_3_sofas <- summary(model_sans_3_sofas)$coefficients / summary(model_sans_3_sofas)$standard.errors
+p_sans_3_sofas <- 2 * (1 - pnorm(abs(z_sans_3_sofas)))
+p_sans_3_sofas
+
+exp(coef(model_sans_3_sofas)) # exponentiate coefficients for odds ratios
 
 ## REPEAT FOR THE REMINDER OF THE VARIABLES
-## CAN ALSO ADD AGE, SEX, DRUG EQ, OR ANY OTHER VARIABLES AS COVARIATES
+## CAN ALSO ADD AGE, SEX, CPZ, OR ANY OTHER VARIABLES AS COVARIATES
 ## model_X <- multinom(class_X ~ SOFAS_0 + <COVARIATE HERE>, data = gmm_class_mem_SOFAS_0)
