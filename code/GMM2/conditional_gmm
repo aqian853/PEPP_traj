@@ -340,8 +340,8 @@ mod_com_gmm2_CDSS <- summarytable(gmm1_2_CDSS_18, gmm2_2_CDSS_18, gmm3_2_CDSS_18
 mod_com_gmm2_CDSS <- as.data.frame(mod_com_gmm2_CDSS)
 
 # Summary
-summary(gmm2_2_cdss_18)
-summary(gmm3_2_cdss_18)
+summary(gmm2_2_CDSS_18)
+summary(gmm3_2_CDSS_18)
 
 ## ============================================================================
 ## SANS
