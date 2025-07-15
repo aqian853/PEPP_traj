@@ -141,6 +141,85 @@ p_sans_3_sofas
 
 exp(coef(model_sans_3_sofas)) # exponentiate coefficients for odds ratios
 
-## REPEAT FOR THE REMINDER OF THE VARIABLES
+
+
+
+
+
+
+
+
+
+
+## Fit multinomail logistic regression - CPZ_0
+## CDSS 2-class =================================================================
+model_cdss_2_cpz <- multinom(class_cdss_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_cdss_2_cpz)
+
+# calculate p-value
+z_cdss_2_cpz <- summary(model_cdss_2_cpz)$coefficients / summary(model_cdss_2_cpz)$standard.errors
+p_cdss_2_cpz <- 2 * (1 - pnorm(abs(z_cdss_2_cpz)))
+p_cdss_2_cpz
+
+exp(coef(model_cdss_2_cpz)) # exponentiate coefficients for odds ratios
+
+## CDSS 3-class =================================================================
+model_cdss_3_cpz <- multinom(class_cdss_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_cdss_3_cpz)
+
+# calculate p-value
+z_cdss_3_cpz <- summary(model_cdss_3_cpz)$coefficients / summary(model_cdss_3_cpz)$standard.errors
+p_cdss_3_cpz <- 2 * (1 - pnorm(abs(z_cdss_3_cpz)))
+p_cdss_3_cpz
+
+exp(coef(model_cdss_3_cpz)) # exponentiate coefficients for odds ratios
+
+
+## LV1 2-class =================================================================
+model_lv1_2_cpz <- multinom(class_LV1_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_lv1_2_cpz)
+
+# calculate p-value
+z_lv1_2_cpz <- summary(model_lv1_2_cpz)$coefficients / summary(model_lv1_2_cpz)$standard.errors
+p_lv1_2_cpz <- 2 * (1 - pnorm(abs(z_lv1_2_cpz)))
+p_lv1_2_cpz
+
+exp(coef(model_lv1_2_cpz)) # exponentiate coefficients for odds ratios
+
+## LV1 3-class =================================================================
+model_lv1_3_cpz <- multinom(class_LV1_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_lv1_3_cpz)
+
+# calculate p-value
+z_lv1_3_cpz <- summary(model_lv1_3_cpz)$coefficients / summary(model_lv1_3_cpz)$standard.errors
+p_lv1_3_cpz <- 2 * (1 - pnorm(abs(z_lv1_3_cpz)))
+p_lv1_3_cpz
+
+exp(coef(model_lv1_3_cpz)) # exponentiate coefficients for odds ratios
+
+
+## SANS 2-class =================================================================
+model_sans_2_cpz <- multinom(class_sans_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_sans_2_cpz)
+
+# calculate p-value
+z_sans_2_cpz <- summary(model_sans_2_cpz)$coefficients / summary(model_sans_2_cpz)$standard.errors
+p_sans_2_cpz <- 2 * (1 - pnorm(abs(z_sans_2_cpz)))
+p_sans_2_cpz
+
+exp(coef(model_sans_2_cpz)) # exponentiate coefficients for odds ratios
+
+## SANS 3-class =================================================================
+model_sans_3_cpz <- multinom(class_sans_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+summary(model_sans_3_cpz)
+
+# calculate p-value
+z_sans_3_cpz <- summary(model_sans_3_cpz)$coefficients / summary(model_sans_3_cpz)$standard.errors
+p_sans_3_cpz <- 2 * (1 - pnorm(abs(z_sans_3_cpz)))
+p_sans_3_cpz
+
+exp(coef(model_sans_3_cpz)) # exponentiate coefficients for odds ratios
+
+
 ## CAN ALSO ADD AGE, SEX, CPZ, OR ANY OTHER VARIABLES AS COVARIATES
 ## model_X <- multinom(class_X ~ SOFAS_0 + <COVARIATE HERE>, data = gmm_class_mem_SOFAS_0)
