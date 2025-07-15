@@ -153,7 +153,7 @@ exp(coef(model_sans_3_sofas)) # exponentiate coefficients for odds ratios
 
 ## Fit multinomail logistic regression - CPZ_0
 ## CDSS 2-class =================================================================
-model_cdss_2_cpz <- multinom(class_cdss_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+model_cdss_2_cpz <- multinom(class_cdss_2 ~ CPZ_0, data = gmm_class_mem_SOFAS_CPZ)
 summary(model_cdss_2_cpz)
 
 # calculate p-value
@@ -164,7 +164,7 @@ p_cdss_2_cpz
 exp(coef(model_cdss_2_cpz)) # exponentiate coefficients for odds ratios
 
 ## CDSS 3-class =================================================================
-model_cdss_3_cpz <- multinom(class_cdss_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+model_cdss_3_cpz <- multinom(class_cdss_3 ~ CPZ_0, data = gmm_class_mem_SOFAS_CPZ)
 summary(model_cdss_3_cpz)
 
 # calculate p-value
@@ -176,7 +176,7 @@ exp(coef(model_cdss_3_cpz)) # exponentiate coefficients for odds ratios
 
 
 ## LV1 2-class =================================================================
-model_lv1_2_cpz <- multinom(class_LV1_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+model_lv1_2_cpz <- multinom(class_LV1_2 ~ CPZ_0, data = gmm_class_mem_SOFAS_CPZ)
 summary(model_lv1_2_cpz)
 
 # calculate p-value
@@ -187,7 +187,7 @@ p_lv1_2_cpz
 exp(coef(model_lv1_2_cpz)) # exponentiate coefficients for odds ratios
 
 ## LV1 3-class =================================================================
-model_lv1_3_cpz <- multinom(class_LV1_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+model_lv1_3_cpz <- multinom(class_LV1_3 ~ CPZ_0, data = gmm_class_mem_SOFAS_CPZ)
 summary(model_lv1_3_cpz)
 
 # calculate p-value
@@ -199,7 +199,7 @@ exp(coef(model_lv1_3_cpz)) # exponentiate coefficients for odds ratios
 
 
 ## SANS 2-class =================================================================
-model_sans_2_cpz <- multinom(class_sans_2 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+model_sans_2_cpz <- multinom(class_sans_2 ~ CPZ_0, data = gmm_class_mem_SOFAS_CPZ)
 summary(model_sans_2_cpz)
 
 # calculate p-value
@@ -210,7 +210,7 @@ p_sans_2_cpz
 exp(coef(model_sans_2_cpz)) # exponentiate coefficients for odds ratios
 
 ## SANS 3-class =================================================================
-model_sans_3_cpz <- multinom(class_sans_3 ~ SOFAS_0, data = gmm_class_mem_SOFAS_CPZ)
+model_sans_3_cpz <- multinom(class_sans_3 ~ CPZ_0, data = gmm_class_mem_SOFAS_CPZ)
 summary(model_sans_3_cpz)
 
 # calculate p-value
