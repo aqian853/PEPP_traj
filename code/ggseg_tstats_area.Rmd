@@ -1,0 +1,85 @@
+---
+title: "ggseg tstats"
+author: "Julia"
+date: "2025-07-24"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(haven)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(RColorBrewer)
+library(caret)
+library(ranger)
+library(ggseg)
+library(broom)
+```
+## Load data
+```{r}
+classes <- read.csv("/projects/aqian/PEPP_traj/reports/GMM_class_membership/gmm_class_div_18mo.csv")
+subj <- read.csv("/projects/svaillancourt/pin_sub_table.csv")
+lh_aparc_area <- read_tsv("/projects/svaillancourt/PEPP_traj/data/raw/freesurfer_measurements/lh_aparc_area.tsv")
+rh_aparc_area <- read_tsv("/projects/svaillancourt/PEPP_traj/data/raw/freesurfer_measurements/rh_aparc_area.tsv")
+lh_aparc_area <- lh_aparc_area %>%
+    rename(FEP_ID = lh.aparc.area)
+rh_aparc_area <- rh_aparc_area %>%
+    rename(FEP_ID = rh.aparc.area)
+aparc_area <- left_join(lh_aparc_area, rh_aparc_area, by = "FEP_ID")
+classes <- classes %>%
+  select(pin, class_sans_2)
+joined <- left_join(subj, classes, by = "pin")
+aparc_area <- left_join(joined, aparc_area, by = "FEP_ID")
+aparc_area <- aparc_area %>%
+    mutate(class = case_when(
+        class_sans_2 == 1 ~ "Persistent_High",
+        TRUE ~ "Persistent_Low"
+    ))
+```
+
+```{r}
+Persistent_high <- aparc_area %>%
+  filter(class == "Persistent_High")
+Persistent_low <- aparc_area %>%
+  filter(class == "Persistent_Low")
+```
+
+```{r}
+# Initialize a dataframe to store the t-values and ROI names
+effect_size <- data.frame(label = character(), tstat = numeric(), stringsAsFactors = FALSE)
+# Loop through each column starting from the 4th column
+for (i in 4:74) {
+  # Get the ROI name
+  roi_name <- colnames(Persistent_low)[i]
+  # Perform a t-test between the ith column of each dataframe
+  t <- t.test(Persistent_low[[i]], Persistent_high [[i]])
+  # Extract the t-value
+  tstat_value <- t$statistic
+  # Append the ROI name and t-statistic to the dataframe
+  effect_size <- rbind(effect_size, data.frame(label = roi_name, tstat = tstat_value))
+}
+ct_effect_size <- effect_size
+ct_effect_size$label <- sub("_area","", ct_effect_size$label)
+```
+
+```{r}
+library(ggseg)
+ggseg(atlas = dk,
+      .data = ct_effect_size,
+      color = "black",
+      mapping = aes(fill = tstat_value),
+      position = "stacked") + theme_void() + scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, lim = c(-3,3))
+```
+```{r}
+## t-test stats for surface area
+t.test(Persistent_low$rh_lateraloccipital, Persistent_high$rh_lateraloccipital) 
+p.adjust(t_lh_rostralanteriorcingulate$p.value, method = "holm", n = 78)
+## ^t = -2.2354, df = 78.168, p-value = 0.02824
+t.test(Persistent_low$lh_postcentral, Persistent_high$lh_postcentral) 
+## ^t = -2.1723, df = 74.584, p-value = 0.03301
+t.test(Persistent_low$lh_superiorparietal, Persistent_high$lh_superiorparietal) ## not significant anymore (negatives)
+
+t.test(Persistent_low$rh_entorhinal, Persistent_high$rh_entorhinal) ## positive not significant at all
+```
