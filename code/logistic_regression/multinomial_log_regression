@@ -3,8 +3,8 @@ library(haven)
 library(dplyr)
 
 ## Load data
-gmm_18mo_class_membership <- read.csv("/projects/aqian/PEPP_traj/reports/GMM_class_membership/gmm_class_div_18mo.csv")
-PEPP_data <- read_sav("/projects/aqian/PEPP_traj/docs/raw_data/PEPP_2024-12-12-IDmatched.sav")
+gmm_18mo_class_membership <- read.csv("gmm_class_div_18mo.csv")
+PEPP_data <- read_sav("PEPP_2024-12-12-IDmatched.sav")
 
 ## Change class variable as factor
 gmm_class_mem <- gmm_18mo_class_membership %>%
