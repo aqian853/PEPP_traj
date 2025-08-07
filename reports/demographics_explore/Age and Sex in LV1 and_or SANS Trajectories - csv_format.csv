@@ -1,0 +1,13 @@
+,,Age,,Gender,,
+,Total n,Mean,SD,Male,Female,Others
+SANS Persistent High,185,22.8,4.29,145 (78.4%),39 (21.1%),1 (0.5%)
+SANS Remitting,449,24.1,4.87,294 (65.5%),153 (34.1%),2 (0.4%)
+LV1 Persistent High,60,23.6,4.13,36 (60.0%),24 (40.0%),0 (0.0%)
+LV1 Persistent Low,411,23.8,4.81,296 (67.1%),114 (27.7%),1 (0.2%)
+LV1 Remitting,140,24,4.72,91 (65.0%),47 (33.6%),2 (1.4%)
+LV1 Persist High + SANS Persist High,33,23.5,4.23,23 (69.7%),10 (30.3%),0 (0.0%)
+LV1 Persist Low + SANS Persist High,121,22.5,4.44,97 (80.2%),23 (19.0%),1 (0.8%)
+LV1 Remitting + SANS Persist High,25,23.3,3.32,21 (84.0%),4 (16.0%),0 (0.0%)
+LV1 Persist High + SANS Remitting,27,23.8,4.07,13 (48.1%),14 (51.9%),0 (0.0%)
+LV1 Persist Low + SANS Remitting,289,24.3,4.89,198 (68.5%),91 (31.5%),0 (0.0%)
+LV1 Remitting + SANS Remitting,115,24.1,4.97,70 (60.9%),43 (37.4%),2 (1.7%)
