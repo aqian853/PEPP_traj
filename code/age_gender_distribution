@@ -1,0 +1,288 @@
+library(haven)
+library(dplyr)
+library(ggplot2)
+
+PEPP_data <- read_sav("PEPP_2024-12-12-IDmatched.sav")
+gmm_class_div_18 <- read.csv("gmm_class_div_18mo.csv")
+
+joint_PEPP_data <- left_join(PEPP_data, gmm_class_div_18,by = "pin")
+
+## Persistent High SANS 2-class
+High_sans <- joint_PEPP_data %>%
+  filter(class_sans_2 == 1)
+
+age_High_sans <- High_sans %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_High_sans
+
+gender_distribution <- High_sans %>%
+  count(gender)
+gender_distribution
+
+ggplot(High_sans,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for SANS 2-class Persistent High",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## Remitting SANS 2-class
+Remit_sans <- joint_PEPP_data %>%
+  filter(class_sans_2 == 2)
+
+age_stats <- Remit_sans %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- Remit_sans %>%
+  count(gender)
+gender_distribution
+
+ggplot(Remit_sans,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for SANS 2-class Remitting",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## Persistent high LV1 3-class
+High_LV1 <- joint_PEPP_data %>%
+  filter(class_LV1_3 == 1)
+
+age_stats <- High_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- High_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(High_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for LV1 3-class Persistent High",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## Persistent low LV1 3-class
+Low_LV1 <- joint_PEPP_data %>%
+  filter(class_LV1_3 == 2)
+
+age_stats <- Low_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- Low_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(Low_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for LV1 3-class Persistent Low",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## Remitting LV1 3-class
+Remit_LV1 <- joint_PEPP_data %>%
+  filter(class_LV1_3 == 3)
+
+age_stats <- Remit_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- Remit_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(Remit_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for LV1 3-class Remitting",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## High lv1 high sans
+High_sans_high_LV1 <- joint_PEPP_data %>%
+  filter(class_sans_2 ==1,
+         class_LV1_3 == 1)
+
+age_stats <- High_sans_high_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- High_sans_high_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(High_sans_high_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for Per. High LV1 + Per. High SANS",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## low lv1 high sans
+High_sans_low_LV1 <- joint_PEPP_data %>%
+  filter(class_sans_2 ==1,
+         class_LV1_3 == 2)
+
+age_stats <- High_sans_low_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- High_sans_low_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(High_sans_low_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for Per. Low LV1 + Per. High SANS",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## Remit lv1 high sans
+High_sans_remit_LV1 <- joint_PEPP_data %>%
+  filter(class_sans_2 ==1,
+         class_LV1_3 == 3)
+
+age_stats <- High_sans_remit_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- High_sans_remit_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(High_sans_remit_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for Remitting LV1 + Per. High SANS",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## High lv1 remit sans
+Remit_sans_high_LV1 <- joint_PEPP_data %>%
+  filter(class_sans_2 == 2,
+         class_LV1_3 == 1)
+
+age_stats <- Remit_sans_high_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- Remit_sans_high_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(Remit_sans_high_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for Per. High LV1 + Remitting SANS",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## low lv1 remit sans
+Remit_sans_low_LV1 <- joint_PEPP_data %>%
+  filter(class_sans_2 == 2,
+         class_LV1_3 == 2)
+
+age_stats <- Remit_sans_low_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- Remit_sans_low_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(Remit_sans_low_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for Per. Low LV1 + Remitting SANS",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
+
+
+## remit lv1 remit sans
+Remit_sans_remit_LV1 <- joint_PEPP_data %>%
+  filter(class_sans_2 == 2,
+         class_LV1_3 == 3)
+
+age_stats <- Remit_sans_remit_LV1 %>%
+  summarise(
+    mean_age = mean(ageentry, na.rm = TRUE),
+    sd_age = sd(ageentry, na.rm = TRUE)
+  )
+age_stats
+
+gender_distribution <- Remit_sans_remit_LV1 %>%
+  count(gender)
+gender_distribution
+
+ggplot(Remit_sans_remit_LV1,aes(x = ageentry)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black", alpha = 0.8) + 
+  labs(
+    title = "Age Distribution for Remitting LV1 + Remitting SANS",
+    x = "Age",
+    y = "Count"
+  ) + 
+  theme_minimal()
