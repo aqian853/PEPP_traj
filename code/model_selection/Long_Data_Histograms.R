@@ -1,8 +1,6 @@
 # check out distributions
 library(reshape2)
 
-# Skipped the step to melt data into long (already done)
-
 # Check column names and plotting ----------------------------------------------
 # LV1
 colnames(PEPP_cdss_LV1_long)
