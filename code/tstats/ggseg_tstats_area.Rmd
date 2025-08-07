@@ -1,11 +1,3 @@
----
-title: "ggseg tstats"
-author: "Julia"
-date: "2025-07-24"
-output: html_document
----
-
-```{r}
 library(tidyverse)
 library(haven)
 library(dplyr)
