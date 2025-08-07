@@ -2,8 +2,8 @@ library(haven)
 library(dplyr)
 library(ggplot2)
 
-PEPP_data <- read_sav("/projects/aqian/PEPP_traj/docs/raw_data/PEPP_2024-12-12-IDmatched.sav")
-gmm_class_div_18 <- read.csv("/projects/aqian/PEPP_traj/reports/GMM_class_membership/gmm_class_div_18mo.csv")
+PEPP_data <- read_sav("PEPP_2024-12-12-IDmatched.sav")
+gmm_class_div_18 <- read.csv("gmm_class_div_18mo.csv")
 
 joint_PEPP_data <- left_join(PEPP_data, gmm_class_div_18,by = "pin")
 
