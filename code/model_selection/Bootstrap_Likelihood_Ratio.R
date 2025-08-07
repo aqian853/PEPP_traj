@@ -11,19 +11,19 @@ gmm2_2_LV1 <- readRDS("gmm2_2_LV1_c.rds")
 gmm3_2_LV1 <- readRDS("gmm3_2_LV1_c.rds")
 
 ### Loading data subsets and removing NAs
-SOFAS <- read.csv("/home/aqian/Downloads/gmm model compare/Data Subsets/PEPP_sofas_long_clean.csv")
+SOFAS <- read.csv("PEPP_sofas_long_clean.csv")
 SOFAS_NA_removed <- as.data.frame(SOFAS)
 SOFAS_NA_removed <- SOFAS_NA_removed[apply(SOFAS_NA_removed, 1, function(row) all(is.finite(row))), ]
 
-LV1 <- read.csv("/home/aqian/Downloads/gmm model compare/Data Subsets/PEPP_cdss_LV1_long_clean.csv")
+LV1 <- read.csv("PEPP_cdss_LV1_long_clean.csv")
 LV1_NA_removed <- as.data.frame(LV1)
 LV1_NA_removed <- LV1_NA_removed[apply(LV1_NA_removed, 1, function(row) all(is.finite(row))), ]
 
-CDSS <- read.csv("/home/aqian/Downloads/gmm model compare/Data Subsets/PEPP_cdss_tot_long_clean.csv")
+CDSS <- read.csv("PEPP_cdss_tot_long_clean.csv")
 CDSS_NA_removed <- as.data.frame(CDSS)
 CDSS_NA_removed <- CDSS_NA_removed[apply(CDSS_NA_removed, 1, function(row) all(is.finite(row))), ]
 
-SANS <- read.csv("/home/aqian/Downloads/gmm model compare/Data Subsets/PEPP_sans_long_clean.csv")
+SANS <- read.csv("PEPP_sans_long_clean.csv")
 SANS_NA_removed <- as.data.frame(SANS)
 SANS_NA_removed <- SANS_NA_removed[apply(SANS_NA_removed, 1, function(row) all(is.finite(row))), ]
 
