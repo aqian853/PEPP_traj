@@ -1,0 +1,153 @@
+,Sierra,,Alyssa,
+Subject,Decision,Reason of Failing/Flagging,Decision,Reason of Failing/Flagging
+201,Pass,,Pass,
+202,Pass,,Pass,
+203,Pass,,Pass,
+205,Pass,,Pass,
+207,Pass,,Pass,
+208,Pass,,Pass,
+209,Pass,,Pass,
+210,Pass,,Pass,
+211,Pass,,Pass,
+212,Pass,,Pass,
+213,Pass,,Pass,
+214,Flag,"Overinclusion of dura in coronal views (y = 14, 30). Present in recon-all images as well (additional hyperintense regions on the outside of the brain (i.e., z = 43, x = -30))",Flag,Some areas picked up outside the red lines in recon. In general there are misalignment between the outlined regions and the scanned images 
+215,Pass,,Pass,
+216,Pass,,Pass,
+217,Pass,,Pass,
+218,Pass,,Pass,
+219,Pass,,Pass,
+220,Pass,Scan quality and segmentation are fine but this participant also has a rather small cerebellum ,Pass,
+221,Pass,,Pass,
+222,Pass,,Pass,
+224,Pass,,Pass,"minor underinclusion y=16 sagittal, minor overinclusion y=46 sagittal"
+225,Pass,,Pass,
+226,Pass,,Pass,minor underinclusion y=-20 sagittal view
+227,Pass,,Pass,
+228,Pass,,Pass,
+229,Pass,,Pass,Size of sagittal view is smaller than others
+230,Pass,,Pass,
+231,Pass,,Pass,
+232,Pass,,Pass,
+233,Pass,,Pass,
+234,Pass,,Pass,
+235,Pass,,Pass,
+236,Pass,,Pass,
+237,Pass,,Pass,
+238,Pass,,Pass,
+239,Pass,,Pass,
+240,Pass,,Pass,
+241,Pass,,Pass,
+242,Pass,,Pass,
+243,Pass,,Pass,
+244,Pass,,Pass,
+245,Pass,,Pass,
+246,Pass,,Pass,
+247,Pass,,Pass,"Underinclusion of inferior temporal lobe y=68, 84 coronal view"
+248,Pass,,Pass,
+249,Pass,,Pass,
+250,Flag,Projection from cerebellum? Right side y=7 coronal view. Unable to identify from niivue,Pass,
+251,Pass,,Pass,
+252,Pass,,Pass,
+253,Pass,,Pass,
+254,Pass,,Flag,Underinclusion x=-1 sagittal
+255,Pass,,Pass,
+256,Pass,,Pass,
+257,Pass,,Flag,Slight underinclusion inferior temporal lobe y=71 coronal
+258,Pass,,Pass,
+259,Pass,,Pass,
+260,Pass,,Pass,Minor underinclusion of temporal lobe y=54 coronal
+261,Pass,,Pass,
+262,Pass,,Pass,
+263,Pass,,Pass,Underinclusion of temporal lobe y=60 coronal
+264,Pass,,Pass,
+265,Flag,"Potential overinclusion of anterior frontal lobe, coronal y=5. Potential underinclusion of right temporal lobe, coronal y = -29. Recon-all looks good.",Pass,
+266,Pass,,Pass,
+267,Pass,,Pass,
+268,Pass,,Pass,Minor underinclusion of temporal lobe - coronal
+269,Flag,"Overinclusion of dura in x=-14, x=-7, x=13, x=20, x=27 sagittal and y = -19, y = -3, y = 12 coronal. Recon-all impacted minimally",Flag,"Slight overinclusion sagittal view x=-14, -7, 13, 20, 7. also in coronal view y=-19, -3, 12, 28. Recon has slight misalignment"
+270,Pass,,Pass,minor disconnection in temperal lobe tracing y=73 coronal
+271,Pass,,Pass,"minor underinclusion - z=2, 8 axial"
+272,Flag,"Overinclusion of dura (coronal y = -4, sagittal x = -11); present in recon-all.",Pass,
+273,Pass,,Pass,
+274,Pass,Image quality is fine but subject also has a small cerebellum,Pass,
+275,Pass,,Pass,Minor underinclusion of temporal lobe y = 56 coronal
+276,Pass,"Image quality is good. Cerebellar and occipital lobe abnormalities. Axial z=6, z=11; recon-all y=-40",Pass,Minor underinclusion of temporal lobe y = 62 coronal. Tracing of brain looks off for the axial view (also the recon coronal view)
+278,Pass,,Pass,
+280,Pass,,Pass,Disconnected temperal lobe tracing y=60 coronal
+289,Pass,,Pass,Disconnected temperal lobe tracing y=72 coronal
+290,Fail,Axial slices are misaligned - smriprep and freesurfer failed,Fail,No image
+291,Pass,,Pass,Disconnected temperal lobe tracing y=67 coronal
+292,Pass,,Pass,
+293,Pass,,Pass,
+294,Pass,,Pass,
+295,Pass,,Pass,
+298,Pass,,Pass,
+299,Pass,,Pass,
+2100,Pass,,Pass,
+2101,Pass,,Pass,"Some noise in the red line for axial view. Underinclusion for y=55, coronal view."
+2102,Pass,,Pass,
+2103,Pass,,Pass,
+2104,Pass,,Pass,
+2105,Fail,"mriqc, smirprep, and freesurfer all failed",Fail,No image
+2107,Flag,"Slight underinclusion of rostral PFC in z =27, and x=52 and x=35 on recon-all. ",Pass,
+2108,Pass,,Pass,Minor disconnection of temporal lobe y=60 coronal
+2109,Pass,,Pass,
+2110,Pass,,Pass,
+2111,Pass,,Pass,
+2112,Pass,,Pass,
+2113,Pass,,Pass,
+2114,Pass,,Flag,"under inclusion z=31, 38, 44 axial view, underinclusion y=19, 35, 52 coronal view"
+2115,Pass,,Pass,
+2116,Pass,,Pass,
+2117,Pass,,Pass,"minor underinclusion, y=4, 21, 55 coronal"
+2118,Pass,,Pass,
+2119,Pass,,Pass,
+2120,Pass,,Pass,
+2121,Pass,,Pass,
+2122,Pass,,Pass,
+2123,Pass,,Flag,Underinclusion - axial z=12 and 19
+2124,Pass,,Pass,
+2125,Pass,,Pass,
+2126,Pass,,Pass,
+2127,Pass,,Pass,
+2128,Pass,,Pass,
+2129,Pass,,Pass,
+2130,Pass,,Pass,
+2131,Pass,,Pass,
+2132,Pass,,Flag,"Section missing/underinclusion - recon, z=-13, axial"
+2133,Pass,,Pass,
+2134,Pass,,Pass,
+2135,Pass,,Pass,
+2136,Pass,,Pass,
+2137,Pass,,Pass,
+2138,Pass,,Flag,Recon z=-6 axial 
+2139,Pass,,Pass,
+2140,Pass,,Pass,
+2141,Pass,,Pass,
+2142,Pass,,Pass,
+2143,Pass,,Pass,
+2144,Pass,,Pass,
+2145,Flag,"Overinclusion of dura in coronal y = 7 (left parietal/frontal lobe region), y=40 (right parietal/frontal lobe). Recon-all coronal y=5 midlly affected in the superior portion of the brain bilaterally
+
+Reviewing this, I think I was a bit dramatic... I strongly believe it should be a pass",Flag,minor underinclusion y=40 coronal view
+2146,Pass,,Pass,
+2147,Pass,,Pass,
+2148,Pass,,Pass,
+2149,Pass,Scan quality and segmentation is good but the participant has a very small cerebellum... not sure if this is due to a known medical condition because they're only 25 ,Pass,minor underinclusion temporal lobe y=60 coronal. Seems to have issues with cerebellum scans
+2150,Flag,Right frontal lobe looks smudged in coronal views y = -4 and y=39. Recon-all do not have any obvious regions missing. I'm not sure if the smudge should be included in the brain or not?,Pass,
+,Sierra,,Alyssa,
+,Final Decision,List of flagged:,Final Decision,List of flagged:
+,Flag,214,Flag,214
+,Flag,250,Pass,254
+,Pass,265,Pass,257
+,Flag,269,Flag,269
+,Flag,272,Pass,276
+,Pass,2107,Pass,2114
+,Pass,2145,Flag,2123
+,Flag,2150,Pass,2132
+,,,Pass,2138
+Flagged pins:,"214, 250, 269, 272, 2123, 2150",,,
+,,,,
+July 23rd,"Passed 250, 2123, 2150",,,
+,"214, 269, and 272 -> re-run to resolve overinclusion",,,

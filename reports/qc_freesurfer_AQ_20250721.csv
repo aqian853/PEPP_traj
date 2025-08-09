@@ -1,0 +1,135 @@
+Subject,Decision,Reason of Failing/Flagging
+201,Pass,
+202,Pass,
+203,Pass,
+205,Pass,
+207,Pass,
+208,Pass,
+209,Pass,
+210,Pass,
+211,Pass,
+212,Pass,
+213,Pass,
+214,Pass,
+215,Pass,
+216,Pass,
+217,Pass,
+218,Pass,
+219,Pass,
+220,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+221,Flag,lh_euler < -150
+222,Pass,
+224,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+225,Pass,
+226,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+227,Pass,
+228,Pass,
+229,Pass,
+230,Pass,
+231,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+232,Pass,
+233,Pass,
+234,Pass,
+235,Pass,
+236,Pass,
+237,Pass,
+238,Pass,
+239,Pass,
+240,Pass,
+241,Pass,
+242,Pass,
+243,Pass,
+244,Pass,
+245,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+246,Pass,
+247,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+248,Pass,
+249,Pass,
+250,Pass,
+251,Pass,
+252,Flag,rh_euler < -150
+253,Pass,
+254,Pass,
+255,Flag,rh_euler < -150; mean_euler_bh < -150
+256,Pass,
+257,Flag,lh_euler < -150; rh_euler = -150; mean_euler_bh < -150
+258,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+259,Pass,
+260,Pass,
+261,Pass,
+262,Pass,
+263,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+264,Flag,rh_euler < -150
+265,Pass,
+266,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+267,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+268,Pass,
+269,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+270,Pass,
+271,Pass,
+272,Pass,
+273,Pass,
+274,Pass,
+275,Pass,
+276,Pass,
+278,Pass,
+280,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+289,Flag,lh_euler < -150
+290,Fail,
+291,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+292,Pass,
+293,Pass,
+294,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+295,Pass,
+298,Pass,
+299,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+2100,Flag,lh_euler < -150
+2101,Pass,
+2102,Pass,
+2103,Pass,
+2104,Flag,lh_euler = -150; rh_euler < -150; mean_euler_bh < -150
+2105,Fail,Removed
+2107,Flag,rh_euler < -150; mean_euler_bh < -150
+2108,Pass,
+2109,Pass,
+2110,Pass,
+2111,Pass,
+2112,Pass,
+2113,Flag,rh_euler < -150; mean_euler_bh < -150
+2114,Pass,
+2115,Pass,
+2116,Pass,
+2117,Pass,
+2118,Pass,
+2119,Pass,
+2120,Pass,
+2121,Pass,
+2122,Pass,
+2123,Pass,
+2124,Pass,
+2125,Pass,
+2126,Flag,rh_euler < -150; mean_euler_bh < -150
+2127,Pass,
+2128,Pass,
+2129,Pass,
+2130,Pass,
+2131,Pass,
+2132,Pass,
+2133,Pass,
+2134,Pass,
+2135,Flag,lh_euler < -150; rh_euler < -150; mean_euler_bh < -150
+2136,Pass,
+2137,Pass,
+2138,Pass,
+2139,Pass,
+2140,Pass,
+2141,Pass,
+2142,Pass,
+2143,Pass,
+2144,Pass,
+2145,Flag,lh_euler = -150
+2146,Pass,
+2147,Pass,
+2148,Pass,
+2149,Pass,
+2150,Pass,
