@@ -1,0 +1,78 @@
+library(haven)
+library(dplyr)
+library(tidyverse)
+
+## Load data
+PEPP_data <- read_sav("/projects/aqian/PEPP_traj/data/raw/PEPP_2024-12-12-IDmatched.sav")
+lh_aparc_thickness <- read_tsv("/projects/svaillancourt/PEPP_traj/data/raw/freesurfer_measurements/lh.aparc.thickness.tsv")
+gmm_class_div_18 <- read.csv("/projects/aqian/PEPP_traj/reports/GMM_class_membership/gmm_class_div_18mo.csv")
+rh_aparc_thickness <- read_tsv("/projects/svaillancourt/PEPP_traj/data/raw/freesurfer_measurements/rh.aparc.thickness.tsv")
+subj <- read.csv("/projects/svaillancourt/pin_sub_table.csv")
+
+joint_PEPP_data <- left_join(PEPP_data, gmm_class_div_18,by = "pin")
+
+lh_aparc_thickness <- lh_aparc_thickness %>%
+  rename(FEP_ID = lh.aparc.thickness)
+rh_aparc_thickness <- rh_aparc_thickness %>%
+  rename(FEP_ID = rh.aparc.thickness)
+aparc_thickness <- left_join(lh_aparc_thickness, rh_aparc_thickness, by = "FEP_ID")
+joint_PEPP_data <- joint_PEPP_data %>%
+  select(pin, class_sans_2)
+joined <- left_join(subj, joint_PEPP_data, by="pin")
+aparc_thickness <- left_join(joined, aparc_thickness, by = "FEP_ID")
+aparc_thickness <- aparc_thickness %>%
+  mutate(class = case_when(
+    class_sans_2 == 1 ~ "Persistent_High",
+    TRUE ~ "Remitting"
+  ))
+
+Persistent_high <- aparc_thickness %>%
+  filter(class == "Persistent_High")
+Remitting <- aparc_thickness %>%
+  filter(class == "Remitting")
+
+aparc_thickness <- aparc_thickness %>%
+  mutate(FEP_ID_num = as.numeric(gsub("sub-", "", FEP_ID)))
+age_gender <- PEPP_data %>%
+  select(FEP_ID, ageentry, gender)
+aparc_thickness_demo <- aparc_thickness %>%
+  left_join(age_gender, by = c("FEP_ID_num" = "FEP_ID"))
+
+aparc_thickness_demo <- aparc_thickness_demo %>%
+  mutate(class_sans_2 = as.factor(class_sans_2))
+
+## age and cortical thickness
+thickness_data <- aparc_thickness_demo %>%
+  select(FEP_ID, ageentry, class_sans_2, starts_with("lh_"), starts_with("rh_"))
+thickness_long <- thickness_data %>%
+  pivot_longer(
+    cols = starts_with("lh_") | starts_with("rh_"),
+    names_to = "region",
+    values_to = "thickness"
+  )
+
+age_results <- thickness_long %>%
+  group_by(region) %>%
+  summarise(
+    estimate = coef(summary(lm(thickness ~ ageentry)))[2, 1],
+    std_error = coef(summary(lm(thickness ~ ageentry)))[2, 2],
+    t_value = coef(summary(lm(thickness ~ ageentry)))[2, 3],
+    p_value = coef(summary(lm(thickness ~ ageentry)))[2, 4]
+  ) %>%
+  mutate(p_adj = p.adjust(p_value, method = "fdr")) %>%
+  arrange(p_adj)
+
+
+age_class_results <- thickness_long %>%
+  group_by(region) %>%
+  summarise(
+    age_est = coef(summary(lm(thickness ~ ageentry + class_sans_2)))[2, 1],
+    age_p = coef(summary(lm(thickness ~ ageentry + class_sans_2)))[2, 4],
+    class_est = coef(summary(lm(thickness ~ ageentry + class_sans_2)))[3, 1],
+    class_p = coef(summary(lm(thickness ~ ageentry + class_sans_2)))[3, 4]
+  ) %>%
+  mutate(
+    age_p_adj = p.adjust(age_p, method = "fdr"),
+    class_p_adj = p.adjust(class_p, method = "fdr")
+  ) %>%
+  arrange(age_p_adj)
