@@ -1,0 +1,58 @@
+library(haven)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(scales)
+
+## Load data
+PEPP_data <- read_sav("/projects/aqian/PEPP_traj/data/raw/PEPP_2024-12-12-IDmatched.sav")1
+
+
+#### Qualitative Data - counts/absolute frequencies and percentages
+REL_counts <- as.data.frame(table(PEPP_data$REL))
+colnames(REL_counts) <- c("REL", "Count")
+REL_counts$Percentage <- (REL_counts$Count / sum(REL_counts$Count)) * 100
+REL_counts$Percentage <- round(REL_counts$Percentage, 2)
+print(REL_counts)
+
+
+
+
+
+#### Quantitative Data - mean, sd, and distribution/histogram
+mean_ageonset <- mean(PEPP_data$ageonset, na.rm = TRUE)
+sd_ageonset <- sd(PEPP_data$ageonset, na.rm = TRUE)
+cat("Mean of ageonset:", mean_ageonset, "\n")
+cat("Standard deviation of ageonset:", sd_ageonset, "\n")
+
+ageonset_data <- PEPP_data[!is.na(PEPP_data$ageonset), ]
+ggplot(ageonset_data, aes(x = ageonset)) +
+  geom_histogram(
+    aes(y = after_stat(count)),
+    binwidth = 1,
+    fill = "skyblue",
+    color = "darkgrey"
+  ) +
+  geom_text(
+    stat = "bin",
+    aes(
+      label = paste0(after_stat(count), " (", scales::percent(after_stat(count / sum(count)), accuracy = 0.01), ")"),
+      y = after_stat(count) / 2  # position label halfway up the bar
+    ),
+    angle = 90,
+    color = "black",
+    size = 3,
+    vjust = 0.5,
+    binwidth = 1
+  ) +
+  scale_x_continuous(breaks = seq(
+    floor(min(ageonset_data$ageonset, na.rm = TRUE)),
+    ceiling(max(ageonset_data$ageonset, na.rm = TRUE)),
+    by = 5
+  )) +
+  labs(
+    title = "Histogram of ageonset",
+    x = "ageonset",
+    y = "Count"
+  ) +
+  theme_minimal()
