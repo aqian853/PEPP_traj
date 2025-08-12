@@ -1,0 +1,91 @@
+library(haven)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(scales)
+
+## Load data
+PEPP_data <- read_sav("/projects/aqian/PEPP_traj/data/raw/PEPP_2024-12-12-IDmatched.sav")
+CogState_subset <- read.csv("/projects/aqian/PEPP_traj/data/processed/cognitive/CogState_subset.csv")
+cognitive_subset <- read.csv("/projects/aqian/PEPP_traj/data/processed/cognitive/cognitive_subset.csv")
+
+# Step 1: Find pins in cognitive_subset but NOT in CogState_subset
+pins_diff <- setdiff(cognitive_subset$pin, CogState_subset$pin)
+
+# Step 2: Filter cognitive_subset for those pins
+PP_subset <- cognitive_subset[cognitive_subset$pin %in% pins_diff, ]
+
+# Step 3: Select pin, FEP_ID, and columns starting with "PP_"
+PP_subset <- PP_subset %>%
+  select(pin, FEP_ID, starts_with("PP_"))
+
+# View result
+head(PP_subset)
+
+
+
+
+## Cog's cogef vs PP's PPef --> I need Cog's PPef vs PP's PPef
+mean_cogstate <- mean (CogState_subset$CogState_ef_z, na.rm = TRUE)
+sd_cogstate <- sd(CogState_subset$CogState_ef_z, na.rm = TRUE)
+print(mean_cogstate)
+print(sd_cogstate)
+
+mean_pp <- mean(PP_subset$PP_ef_z, na.rm = TRUE)
+sd_pp <- sd(PP_subset$PP_ef_z, na.rm = TRUE)
+print(mean_pp)
+print(sd_pp)
+
+data_long <- tibble(
+  exec_functioning = c(rep("CogState_ef_z", length(CogState_subset$CogState_ef_z)),
+                       rep("PP_ef_z", length(PP_subset$PP_ef_z))),
+  z_score = c(CogState_subset$CogState_ef_z, PP_subset$PP_ef_z)
+)
+
+ggplot(data_long, aes(x = z_score))+
+  geom_histogram(bins = 20, fill = "skyblue", color = "darkgrey") + 
+  facet_wrap (~ exec_functioning, scales = "free") + 
+  theme_minimal() + 
+  labs(title = "Histograms of CogState vs PP Exec Functioning",
+       x = "z_score",
+       y = "Count")
+
+
+
+
+
+
+
+
+
+pins_diff_CogwPP <- setdiff(cognitive_subset$pin, PP_subset$pin)
+
+CogwPP_subset <- cognitive_subset[cognitive_subset$pin %in% pins_diff_CogwPP, ]
+CogwPP_subset <- CogwPP_subset %>%
+  select(pin, FEP_ID, starts_with("PP_"))
+
+## Cog's PPef vs PP's PPef
+mean_cogstate <- mean (CogState_subset$CogState_ef_z, na.rm = TRUE)
+sd_cogstate <- sd(CogState_subset$CogState_ef_z, na.rm = TRUE)
+print(mean_cogstate)
+print(sd_cogstate)
+
+mean_cogpp <- mean(CogwPP_subset$PP_ef_z, na.rm = TRUE)
+sd_cogpp <- sd(CogwPP_subset$PP_ef_z, na.rm = TRUE)
+print(mean_cogpp)
+print(sd_cogpp)
+
+data_long <- tibble(
+  exec_functioning = c(rep("CogState_ef_z", length(CogState_subset$CogState_ef_z)),
+                       rep("PP_ef_z", length(CogwPP_subset$PP_ef_z))),
+  z_score = c(CogState_subset$CogState_ef_z, CogwPP_subset$PP_ef_z)
+)
+
+ggplot(data_long, aes(x = z_score))+
+  geom_histogram(bins = 20, fill = "skyblue", color = "darkgrey") + 
+  facet_wrap (~ exec_functioning, scales = "free") + 
+  theme_minimal() + 
+  labs(title = "Histograms of CogState vs PP Exec Functioning",
+       x = "z_score",
+       y = "Count")
+
