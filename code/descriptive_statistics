@@ -5,31 +5,19 @@ library(ggplot2)
 library(scales)
 
 ## Load data
-PEPP_data <- read_sav("/projects/aqian/PEPP_traj/data/raw/PEPP_2024-12-12-IDmatched.sav")1
+PEPP_data <- read_sav("/projects/aqian/PEPP_traj/data/raw/PEPP_2024-12-12-IDmatched.sav")
 
+#### Quantitative Data - mean, sd, and distribution/histogram ================================================================
+mean_conv <- mean(PEPP_data$conv, na.rm = TRUE)
+sd_conv <- sd(PEPP_data$conv, na.rm = TRUE)
+cat("Mean of conv:", mean_conv, "\n")
+cat("Standard deviation of conv:", sd_conv, "\n")
 
-#### Qualitative Data - counts/absolute frequencies and percentages
-REL_counts <- as.data.frame(table(PEPP_data$REL))
-colnames(REL_counts) <- c("REL", "Count")
-REL_counts$Percentage <- (REL_counts$Count / sum(REL_counts$Count)) * 100
-REL_counts$Percentage <- round(REL_counts$Percentage, 2)
-print(REL_counts)
-
-
-
-
-
-#### Quantitative Data - mean, sd, and distribution/histogram
-mean_ageonset <- mean(PEPP_data$ageonset, na.rm = TRUE)
-sd_ageonset <- sd(PEPP_data$ageonset, na.rm = TRUE)
-cat("Mean of ageonset:", mean_ageonset, "\n")
-cat("Standard deviation of ageonset:", sd_ageonset, "\n")
-
-ageonset_data <- PEPP_data[!is.na(PEPP_data$ageonset), ]
-ggplot(ageonset_data, aes(x = ageonset)) +
+conv_data <- PEPP_data[!is.na(PEPP_data$conv), ]
+ggplot(conv_data, aes(x = conv)) +
   geom_histogram(
     aes(y = after_stat(count)),
-    binwidth = 1,
+    binwidth = 200,
     fill = "skyblue",
     color = "darkgrey"
   ) +
@@ -43,40 +31,66 @@ ggplot(ageonset_data, aes(x = ageonset)) +
     color = "black",
     size = 3,
     vjust = 0.5,
-    binwidth = 1
+    binwidth = 200
   ) +
   scale_x_continuous(breaks = seq(
-    floor(min(ageonset_data$ageonset, na.rm = TRUE)),
-    ceiling(max(ageonset_data$ageonset, na.rm = TRUE)),
-    by = 5
+    floor(min(conv_data$conv, na.rm = TRUE)),
+    ceiling(max(conv_data$conv, na.rm = TRUE)),
+    by = 400
   )) +
   labs(
-    title = "Histogram of ageonset",
-    x = "ageonset",
+    title = "Histogram of conv",
+    x = "conv",
     y = "Count"
   ) +
   theme_minimal()
 
 
+#### Quantitative data - grouped ====================================================================================
+columns <- c("PP_sop_z", "PP_va_z", "PP_vism_z", "PP_verbm_z",
+             "PP_wm_z", "PP_ef_z", "PP_sc_z")
+
+for (col in columns) {
+  mean_val <- mean(PEPP_data[[col]], na.rm = TRUE)
+  sd_val <- sd(PEPP_data[[col]], na.rm = TRUE)
+  cat("Column:", col, "\n")
+  cat("Mean:", mean_val, "\n")
+  cat("SD:", sd_val, "\n\n")
+}
+
+## Group Histograms (Long data)
+columns <- c("PP_sop_z", "PP_va_z", "PP_vism_z",
+             "PP_verbm_z", "PP_wm_z", "PP_ef_z", "PP_sc_z")
+PP_long <- PEPP_data %>%
+  select(all_of(columns)) %>%
+  pivot_longer(cols = everything(), 
+               names_to = "PP_Measures", 
+               values_to = "z_score")
+
+ggplot(PP_long, aes(x = z_score)) +
+  geom_histogram(bins = 30, fill = "skyblue", color = "darkgrey") +
+  facet_wrap(~ PP_Measures, scales = "free") +
+  theme_minimal() +
+  labs(title = "Histograms of Pen_and_Paper_Measures",
+       x = "z-score",
+       y = "Count")
 
 
+#### Qualitative Data - counts/absolute frequencies and percentages =======================================================
+PSR_0_counts <- as.data.frame(table(PEPP_data$PSR_0))
+colnames(PSR_0_counts) <- c("PSR_0", "Count")
+PSR_0_counts$Percentage <- (PSR_0_counts$Count / sum(PSR_0_counts$Count)) * 100
+PSR_0_counts$Percentage <- round(PSR_0_counts$Percentage, 2)
+print(PSR_0_counts)
 
 
+#### subsetting data ========================================================================================================
+cognitive_subset <- PEPP_data %>%
+  select("pin", "FEP_ID", "CogState_sop_z", "CogState_va_z", "CogState_vism_z", 
+         "CogState_verbm_z", "CogState_wm_z", "CogState_ef_z", "CogState_sc_z", 
+         "PP_sop_z", "PP_va_z", "PP_vism_z", 
+         "PP_verbm_z", "PP_wm_z", "PP_ef_z", "PP_sc_z")
+cognitive_subset <- cognitive_subset %>%
+  filter(rowSums(!is.na(across(-c(pin, FEP_ID)))) > 0)
 
-# Vector of comp column names
-comp_cols <- paste0("comp_", c(0, 1, 2, 3, 6, 9, 12, 18, 24))
-
-# Loop through each comp column and summarize
-comp_summary <- lapply(comp_cols, function(col) {
-  counts <- table(PEPP_data[[col]])
-  df <- as.data.frame(counts)
-  colnames(df) <- c("Value", "Count")
-  df$Percentage <- round((df$Count / sum(df$Count)) * 100, 2)
-  df$Variable <- col  # Track which comp variable
-  df
-}) %>%
-  bind_rows() %>%
-  select(Variable, Value, Count, Percentage)
-
-# View the result
-print(comp_summary)
+summary(Pen_and_Paper_subset, table)
