@@ -5,7 +5,14 @@ trajectories of depressive and negative symptoms in PEPP
 
 Created by Alyssa Qian alyssa.qian@camh.ca
 
-**SEE STARTUP.MD FOR INSTRUCTIONS ON CREATING A GIT REPO**
+Contact People:
+	Principle Investigator: Aristotle Voineskos
+	Primary: Alyssa Qian alyssa.qian@camh.ca
+     Please contact alyssa.qian@mail.utoronto.ca if the email above does not work
+	Others:
+         Sierra Vaillancourt Sierra.Vaillancourt@camh.ca
+         Lindsay Oliver Lindsay.Oliver@camh.ca
+         Julia Gallucci Julia.Gallucci@camh.ca
 
 Project Organization
 -----------------------------------
@@ -16,6 +23,8 @@ Project Organization
     ├── LICENSE            <- usage license if applicable
     ├── data
     │   ├── processed      <- The final dataset (can include subfolders etc)
+            ├──
+            ├──
     │   └── raw            <- The original dataset, generally a link to minimally preprocessed data
     │
     ├── notebooks          <- Jupyter/R notebooks for analysis workflow - Naming should begin with a number, followed by an underscore and a description (e.g. 01_compile_demographics.Rmd)
