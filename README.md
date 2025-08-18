@@ -31,9 +31,7 @@ Project Organization
     ├── .gitignore         <- Files to not upload to github - by default includes /data
     ├── LICENSE            <- usage license if applicable
     ├── data
-    │   ├── processed      <- The final dataset (can include subfolders etc)
-            ├── 
-            ├── 
+    │   ├── processed      <- The processed data, including subsets of SANS, CDSS, or LV1 dataset
     │   └── raw            <- The original dataset, contains the raw PEPP data
     │
     ├── notebooks          <- Empty
