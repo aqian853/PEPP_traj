@@ -58,4 +58,10 @@ Project Organization
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment (if applicable)
     │
-    ├── code/src           <- Source code for use in this project (virtual environments, bash scripts, etc)
+    ├── code           <- RStudio code for use in this project
+		├── GMM2 			   			<- Growth Mixture Model, divided into 18 months data and different variables for 24 months
+ 		├── demographics_exploration   	<- Explored how age, gender, and other demographics differ in 18mo trajectories
+   		├── logistic_regression   		<- Linear regression and multinomial logistic regression
+	 	├── model_selection   			<- Fit statistics, including average posterior probabilities, boostrap likelihood ratio, scaled entropy, etc.
+   		├── tstats   					<- T-tests compairing cortical thickness and surface area of brain regions
+
