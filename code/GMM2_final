@@ -433,6 +433,21 @@ PEPP_gen_dep_plotting %>%
   scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_gen_dep_plotting$class)), name = "Set1")) +  # Distinct colors
   theme_classic()
 
+# Plotting individual classes
+PEPP_gen_dep_plotting_2 %>%
+  ggplot(aes(x = time_point, y = LV1_score, group = pin, color = class)) +
+  geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
+  geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
+  scale_x_continuous(breaks = unique(PEPP_gen_dep_plotting_2$time_point)) +
+  labs(x = "Time Point (Months)", y = "CDSS General Depressive Composite Score", colour = "Latent Class") +
+  geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
+  labs(title = "CDSS General Depressive Composite Score Over Time") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
+  #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
+  scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_gen_dep_plotting_2$class)), name = "Set1")) +  # Distinct colors
+  theme_classic()+
+  facet_wrap(~ class,ncol = 2)  # Facet by latent class
+
 ## General depressive symptoms fit statistics
 # Posterior probabilities
 pp_gmm1_gen_dep <- gmm1_gen_dep$pprob
@@ -643,13 +658,28 @@ PEPP_sans_plotting %>%
   geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
   geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
   scale_x_continuous(breaks = unique(PEPP_sans_plotting$time_point)) +
-  labs(x = "Time Point (Months)", y = "SANS Composite Score", colour = "Latent Class") +
+  labs(x = "Time Point (Months)", y = "SANS Negative Symptom Composite Score", colour = "Latent Class") +
   geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
-  labs(title = "SANS Composite Score Over Time") +
+  labs(title = "SANS Negative Symptom Composite Score Over Time") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
   #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
   scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_sans_plotting$class)), name = "Set1")) +  # Distinct colors
   theme_classic()
+
+# Plotting individual classes
+PEPP_sans_plotting_2 %>%
+  ggplot(aes(x = time_point, y = LV1_score, group = pin, color = class)) +
+  geom_line(alpha = 0.1, size = 0.5) +  # Make lines more transparent and thinner
+  geom_smooth(aes(group = class), method = "loess", size = 2, se = TRUE, alpha = 0.4) +  # Match SE band color with lines
+  scale_x_continuous(breaks = unique(PEPP_sans_plotting_2$time_point)) +
+  labs(x = "Time Point (Months)", y = "SANS Negative Symptom Composite Score", colour = "Latent Class") +
+  geom_point(size = 1, alpha = 0.1) +  # Smaller and more transparent points
+  labs(title = "SANS Negative Symptom Composite Score Over Time") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
+  #guides(color = "none", fill = "none") +  # Remove the legend for fill (SE band)
+  scale_color_manual(values = RColorBrewer::brewer.pal(n = length(unique(PEPP_sans_plotting_2$class)), name = "Set1")) +  # Distinct colors
+  theme_classic()+
+  facet_wrap(~ class,ncol = 2)  # Facet by latent class
 
 ## SANS Fit statistics
 # Posterior probabilities
